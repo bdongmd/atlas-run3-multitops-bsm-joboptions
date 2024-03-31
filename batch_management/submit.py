@@ -19,7 +19,7 @@ parser.add_argument(
     type=float,
     nargs="+",
     # default=[13_600., 13_000.],
-    default=[13_000.],
+    default=[13_600.],
 )
 args = parser.parse_args()
 
@@ -36,7 +36,7 @@ handler['memory'] = "8GB"
 handler['cpu'] = 1
 handler['project'] = "af-atlas"
 ## only for lxplus
-# handler['jobflavour'] = "nextweek"
+handler['jobflavour'] = "nextweek"
 
 for dsid, com in product(args.dsids, args.ecmEnergy):
     seed = int(random.uniform(100000, 500000))

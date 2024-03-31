@@ -7,4 +7,5 @@
 # rivet-build Rivetttw_ttH.so plugins/ttw_ttH.cc
 # rivet-build RivetttH_parton.so plugins/ttH_parton.cc
 # rivet-build RivetttX_ttVV.so plugins/ttX_ttVV.cc
-rivet-build Rivettttt_ttZp.so plugins/tttt_ttZp.cc
+# rivet-build Rivettttt_ttZp.so plugins/tttt_ttZp.cc
+rivet-build Rivettttt_ttZp_add.so plugins/tttt_ttZp_add.cc

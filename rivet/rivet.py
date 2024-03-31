@@ -9,8 +9,8 @@ rivet = Rivet_i()
 import os
 from os.path import join
 rivet.AnalysisPath = join(os.environ['TestArea'], '..', 'rivet')
-
-rivet.Analyses += [ 'tttt_ttZp' ] # 'tttt_parton', 'tttt_event' , 
+print("testflag"+rivet.AnalysisPath)
+rivet.Analyses += [ 'tttt_ttZp_add' ] # 'tttt_parton', 'tttt_event' , 
 #rivet.Analyses += ['ttX_ttVV']
 rivet.RunName = ''
 rivet.HistoFile = 'Rivet.yoda.gz'

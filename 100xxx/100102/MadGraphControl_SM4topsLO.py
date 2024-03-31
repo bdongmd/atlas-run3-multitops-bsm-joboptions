@@ -67,18 +67,8 @@ print_cards()
 
 fileN = process_dir+'/SubProcesses/setscales.f'
 mark  = '      elseif(dynamical_scale_choice.eq.0) then'
-rmLines = ['ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc',
-           'cc      USER-DEFINED SCALE: ENTER YOUR CODE HERE                                 cc',
-           'cc      to use this code you must set                                            cc',
-           'cc                 dynamical_scale_choice = 0                                    cc',
-           'cc      in the run_card (run_card.dat)                                           cc',
-           'write(*,*) "User-defined scale not set"',
-           'stop 1',
-           'temp_scale_id=\'User-defined dynamical scale\' ! use a meaningful string',
-           'tmp = 0',
-           'cc      USER-DEFINED SCALE: END OF USER CODE                                     cc',
-           'stop 21',
-           'rscale = 0'
+rmLines = [
+           '         rscale = user_dynamical_scale(P)'
            ]
 
 flag=0

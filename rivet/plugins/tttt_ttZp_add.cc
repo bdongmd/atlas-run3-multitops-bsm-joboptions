@@ -49,12 +49,12 @@ namespace Rivet {
     return ptcl;
   }
 
-  class tttt_ttZp: public Analysis {
+  class tttt_ttZp_add: public Analysis {
   public:
 
     /// Constructor
-    tttt_ttZp()
-      : Analysis("tttt_ttZp")
+    tttt_ttZp_add()
+      : Analysis("tttt_ttZp_add")
     {    }
 
 
@@ -112,8 +112,8 @@ namespace Rivet {
         book(_h["Inclusive_mZprime"],"Inclusive_mZprime",870,150,4500);
         book(_h["Inclusive_mZprime_zoomin"],"Inclusive_mZprime_zoomin",1740,150,4500);
 
-        book(_h["Inclusive_mttbar_Leading_SubLeading"],"Inclusive_mttbar_Leading_SubLeading",870,150,4500);
-        book(_h["Inclusive_mttbar_Leading_SubLeading_zoomin"],"Inclusive_mttbar_Leading_SubLeading_zoomin",1740,150,4500);
+        book(_h["Inclusive_mttbar_Leading"],"Inclusive_mttbar_Leading",870,150,4500);
+        book(_h["Inclusive_mttbar_Leading_zoomin"],"Inclusive_mttbar_Leading_zoomin",1740,150,4500);
 
         book(_h["Inclusive_mZprime400"],"Inclusive_mZprime400",20,300,500);
         book(_h["Inclusive_mZprime500"],"Inclusive_mZprime500",20,400,600);
@@ -137,8 +137,8 @@ namespace Rivet {
         book(_h["Inclusive_mTop2_zoomin_FromZprime"],"Inclusive_mTop2_zoomin_FromZprime",40,165,175);
         book(_h["Inclusive_dR_ttbar_FromZprime"],"Inclusive_dR_ttbar_FromZprime",20,0,5);
 
-        //book(_h["Inclusive_InvM_FromZprime"],"Inclusive_InvM_FromZprime",870,150,4500);
-        //book(_h["Inclusive_InvM_FromZprime_zoomin"],"Inclusive_InvM_FromZprime_zoomin",1740,150,4500);
+        book(_h["Inclusive_InvM_FromZprime"],"Inclusive_InvM_FromZprime",870,150,4500);
+        book(_h["Inclusive_InvM_FromZprime_zoomin"],"Inclusive_InvM_FromZprime_zoomin",1740,150,4500);
 
         book(_h["Inclusive_pToverInv_ttbar_FromZprime"],"Inclusive_pToverInv_ttbar_FromZprime",25,0,2);
 
@@ -184,6 +184,13 @@ namespace Rivet {
         book(_h["Inclusive_lep3Pt"],"Inclusive_lep3Pt",20,0,100);
         book(_h["Inclusive_lep3Eta"],"Inclusive_lep3Eta",10,-2.5,2.5);
         book(_h["Inclusive_lep3Phi"],"Inclusive_lep3Phi",16,-4,4);
+
+
+        book(_h["Inclusive_positop1Pt"],"Inclusive_positop1Pt",1740,150,4500);
+        book(_h["Inclusive_positop2Pt"],"Inclusive_positop2Pt",1740,150,4500);
+        book(_h["Inclusive_antitop1Pt"],"Inclusive_antitop1Pt",1740,150,4500);
+        book(_h["Inclusive_antitop2Pt"],"Inclusive_antitop2Pt",1740,150,4500);
+
     }
 
 
@@ -199,6 +206,7 @@ namespace Rivet {
 
       Particles ZprimeCands;
       Particles topCands,topCandsFromZprime,topCandsFromNonZprime;
+      Particles positopCands,antitopCands;
 
       for (ConstGenParticlePtr part : HepMCUtils::particles(event.genEvent()))
       {
@@ -225,6 +233,14 @@ namespace Rivet {
 
                       // append top candidates
                       topCands.push_back(Particle(part));
+                      if (part->pdg_id() == 6)
+                      {
+                        positopCands.push_back(Particle(part));
+                      }
+                      else
+                      {
+                        antitopCands.push_back(Particle(part));
+                      }
 
                       if (!( part->production_vertex() && ( hasParent(part,32) ) ) ) {
                           topCandsFromNonZprime.push_back(Particle(part));
@@ -342,11 +358,24 @@ namespace Rivet {
 
       sortByPt(topCandsFromZprime);
       sortByPt(topCands);
+      sortByPt(positopCands);
+      sortByPt(antitopCands);
 
-      double InvM_ttbar_Leading_SubLeading = ( topCands.at(0).momentum() + topCands.at(1).momentum() ).mass()/GeV;
-      _h["Inclusive_mttbar_Leading_SubLeading"]->fill(InvM_ttbar_Leading_SubLeading);
-      _h["Inclusive_mttbar_Leading_SubLeading_zoomin"]->fill(InvM_ttbar_Leading_SubLeading);
+      if ( positopCands.size() == 2 && antitopCands.size() == 2){
+        double InvM_ttbar_Leading_SubLeading = ( positopCands.at(0).momentum() + antitopCands.at(0).momentum() ).mass()/GeV;
+        _h["Inclusive_mttbar_Leading"]->fill(InvM_ttbar_Leading_SubLeading);
+        _h["Inclusive_mttbar_Leading_zoomin"]->fill(InvM_ttbar_Leading_SubLeading);
+      }
 
+      if ( positopCands.size() == 2 ){
+        _h["Inclusive_positop1Pt"]->fill(positopCands.at(0).pT());
+        _h["Inclusive_positop2Pt"]->fill(positopCands.at(1).pT());
+      }
+
+      if ( antitopCands.size() == 2 ){
+        _h["Inclusive_antitop1Pt"]->fill(antitopCands.at(0).pT());
+        _h["Inclusive_antitop2Pt"]->fill(antitopCands.at(1).pT());
+      }
 
       if ( topCandsFromZprime.size() == 2 ){
         double pT_ttbar_FromZprime = (topCandsFromZprime.at(0).momentum() + topCandsFromZprime.at(1).momentum()).pT()/GeV;
@@ -363,7 +392,7 @@ namespace Rivet {
         _h["Inclusive_mTop2_zoomin_FromZprime"]->fill(topCandsFromZprime.at(1).mass());
         _h["Inclusive_dR_ttbar_FromZprime"]->fill(dR_ttbar_FromZprime);
         _h["Inclusive_InvM_FromZprime"]->fill(InvM_ttbar_FromZprime);
-        //_h["Inclusive_InvM_FromZprime_zoomin"]->fill(InvM_ttbar_FromZprime);
+        _h["Inclusive_InvM_FromZprime_zoomin"]->fill(InvM_ttbar_FromZprime);
         _h["Inclusive_InvM_FromZprime400"]->fill(InvM_ttbar_FromZprime);
         _h["Inclusive_InvM_FromZprime500"]->fill(InvM_ttbar_FromZprime);
         _h["Inclusive_InvM_FromZprime600"]->fill(InvM_ttbar_FromZprime);
@@ -388,7 +417,7 @@ namespace Rivet {
         _h["Inclusive_mTop2_zoomin_FromZprime"]->fill(-999);
         _h["Inclusive_dR_ttbar_FromZprime"]->fill(-999);
         _h["Inclusive_InvM_FromZprime"]->fill(-999);
-        //_h["Inclusive_InvM_FromZprime_zoomin"]->fill(-999);
+        _h["Inclusive_InvM_FromZprime_zoomin"]->fill(-999);
         _h["Inclusive_InvM_FromZprime400"]->fill(-999);
         _h["Inclusive_InvM_FromZprime500"]->fill(-999);
         _h["Inclusive_InvM_FromZprime600"]->fill(-999);
@@ -552,6 +581,6 @@ namespace Rivet {
 
 
   // The hook for the plugin system
-  DECLARE_RIVET_PLUGIN(tttt_ttZp);
+  DECLARE_RIVET_PLUGIN(tttt_ttZp_add);
 
 }
