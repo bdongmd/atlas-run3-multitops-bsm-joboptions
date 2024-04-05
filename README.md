@@ -41,6 +41,13 @@ rivet-mkhtml --errs --no-weights  -o my_plots Rivet.yoda:"Title=validation plots
 # compare 13 TeV and 13.6 TeV samples
 rivet-mkhtml --errs --no-weights  -o my_plots output/100400_13000GeV_372777/Rivet.yoda:"Title=sqrt(s)=13TeV" output/100400_13600GeV_126313/Rivet.yoda:"Title=sqrt(s)=13.6TeV"
 ```
+## Add JO
+
+### ttZprime
+
+To quickly generate the sample for parameter of intreset:
+```python create_sample.py --DSID 100870 --process tttt --mass 600 --ct 1.0 --theta 0.79 --reweight 0
+```
 
 ## Overview of samples
 
@@ -141,7 +148,16 @@ rivet-mkhtml --errs --no-weights  -o my_plots output/100400_13000GeV_372777/Rive
 | 100865 | ttZ' s+t ch  |  400 | AUTO  |  2.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
 | 100866 | ttZ' s+t ch  | 1000 | AUTO  |  2.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
 | 100867 | ttZ' s+t ch  | 2000 | AUTO  |  2.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
-
+| 100870 | ttZ' s+t ch  | 1000 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100871 | ttZ' s+t ch  | 1500 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100872 | ttZ' s+t ch  | 2000 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100873 | ttZ' s+t ch  | 3000 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100880 | ttZ' s+t SM  | 600  | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100880 | ttZ' s+t SM  | 1000 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100880 | ttZ' s+t SM  | 1250 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100880 | ttZ' s+t SM  | 1500 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100880 | ttZ' s+t SM  | 2000 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100880 | ttZ' s+t SM  | 3000 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
 ### Backgrounds
 
 #### Multi-top

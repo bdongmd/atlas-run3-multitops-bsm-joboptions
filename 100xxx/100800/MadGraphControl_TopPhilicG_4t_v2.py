@@ -8,7 +8,7 @@ from re import findall
 #---------------------------------------------------------------------------------------------------                                               
 lhe_version = 3.0
 safefactor = 6
-development_mode=False
+development_mode=True
 
 # get job option name to extract parameters
 from MadGraphControl.MadGraphUtilsHelpers import get_physics_short
@@ -98,12 +98,14 @@ print("- ME reweighting enabled {p}".format(p=reweight))
 #---------------------------------------------------------------------------------------------------
 # Set PDF via base fragment and set parameters
 #---------------------------------------------------------------------------------------------------
-import MadGraphControl.MadGraph_NNPDF30NLO_Base_Fragment
+#import MadGraphControl.MadGraph_NNPDF30NLO_Base_Fragment
 
 extras = {'auto_ptj_mjj':'False',
           'maxjetflavor':'5',
           'event_norm':'average',
           'cut_decays':'F', 
+          'use_syst': "False",
+          'pdlabel':"'nn23lo1'",
           'dynamical_scale_choice':3,
           }
 

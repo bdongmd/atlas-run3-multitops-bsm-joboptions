@@ -31,8 +31,8 @@ TMPWORKDIR=/tmp/evtgen_$TAG
 
 export RIVET_ANALYSIS_PATH=$RIVET_ANALYSIS_PATH:$PWD/rivet/
 
-SUBMIT_TAG=${DSID}_${COMENERGY/.*}GeV_03282024
-SUBMIT_GRID='pathena --trf "Gen_tf.py --maxEvents=100000 --ecmEnergy='$COMENERGY' --randomSeed=%RNDM:1000 --jobConfig='${DSID}' --outputEVNTFile %OUT.EVNT.root" --outDS user.rqian.ttZprime_'$SUBMIT_TAG' --split 10 --excludeFile output'
+SUBMIT_TAG=${DSID}_${COMENERGY/.*}GeV_04042024
+SUBMIT_GRID='pathena --trf "Gen_tf.py --maxEvents=100000 --ecmEnergy='$COMENERGY' --randomSeed=%RNDM:1000 --jobConfig='${DSID}' --outputEVNTFile %OUT.EVNT.root" --outDS user.rqian.ttZprime'$SUBMIT_TAG' --split 10 --excludeFile output --memory=4096'
 echo $SUBMIT_GRID
 $SUBMIT_GRID
 
