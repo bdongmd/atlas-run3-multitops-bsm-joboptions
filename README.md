@@ -148,9 +148,9 @@ To quickly generate the sample for parameter of intreset:
 | 100865 | ttZ' s+t ch  |  400 | AUTO  |  2.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
 | 100866 | ttZ' s+t ch  | 1000 | AUTO  |  2.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
 | 100867 | ttZ' s+t ch  | 2000 | AUTO  |  2.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
-| 100870 | ttZ' s+t ch  | 1000 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
-| 100871 | ttZ' s+t ch  | 1500 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
-| 100872 | ttZ' s+t ch  | 2000 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100870 | ttZ' s+t ch  | 600 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100871 | ttZ' s+t ch  | 1250 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100872 | ttZ' s+t ch  | 1500 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
 | 100873 | ttZ' s+t ch  | 3000 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
 | 100880 | ttZ' s+t SM  | 600  | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
 | 100880 | ttZ' s+t SM  | 1000 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
