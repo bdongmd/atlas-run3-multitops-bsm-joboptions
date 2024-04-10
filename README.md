@@ -22,6 +22,13 @@ source setup.sh
 bash run_batch.sh
 ```
 
+## Grid submission
+
+Interference study takes very long time to run and can only be done on grid:
+
+```
+python grid_management/submit.py -d list_of_JO
+```
 
 ## Make validation plots
 
