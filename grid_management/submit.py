@@ -23,14 +23,14 @@ parser.add_argument(
 parser.add_argument(
     "--split",
     help="Number of splits for grid job",
-    type=float,
+    type=int,
     default=10,
 )
 
 parser.add_argument(
     "--njobs",
     help="Number of grid jobs. ",
-    type=float,
+    type=int,
     default=10,
 )
 
