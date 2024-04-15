@@ -9,7 +9,6 @@ rivet = Rivet_i()
 import os
 from os.path import join
 rivet.AnalysisPath = join(os.environ['TestArea'], '..', 'rivet')
-print("testflag"+rivet.AnalysisPath)
 rivet.Analyses += [ 'tttt_ttZp_add' ] # 'tttt_parton', 'tttt_event' , 
 #rivet.Analyses += ['ttX_ttVV']
 rivet.RunName = ''
