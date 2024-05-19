@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# sh run.sh 100920
+
 # global settings
 RUNRIVET=1 # set to 0 if you do not wish the run rivet right after evgen.
 MAKERIVETPLOTS=0 # set to 1 if you wish to produce the rivet plots and html files (must have RUNRIVET=1), otherwise set to 0
@@ -36,28 +38,60 @@ if [[ -z ${SEED} ]]; then
     SEED=1234;
 fi
 
+# turn on gridpack mode
+GRIDPACK=${5}
+if [[ -z ${SEED} ]]; then
+    echo "gridpack mode is set to default off";
+    GRIDPACK=0;
+fi
+
 # Input LHE file
-INPUTGENFILE=${5}
+INPUTGENFILE=${6}
 if [[ -z ${INPUTGENFILE} ]]; then
     echo "input generator file not provided, running without it.";
 fi
 
 # launch job
-TAG=${DSID}_${COMENERGY/.*}GeV_${SEED}
-RESULTDIR=$PWD/output/$TAG
-TMPWORKDIR=/tmp/evtgen_$TAG
+if [[ $GRIDPACK -eq 0 ]];then
+TAG=${DSID}_${COMENERGY/.*}GeV_${SEED}_MCJO
+fi
+if [[ $GRIDPACK -eq 1 ]];then
+TAG=${DSID}_${COMENERGY/.*}GeV_${SEED}_gridpack_MCJO
+fi
 
+#tier3
+RESULTDIR=/msu/data/t3work9/rongqian/atlascodingtutorial/atlas-run3-multitops-bsm-joboptions/output/$TAG
+TMPWORKDIR=/tmp/evtgen_$TAG
+TMPWORKDIR=/msu/data/t3work9/rongqian/atlascodingtutorial/atlas-run3-multitops-bsm-joboptions/work/evtgen_$TAG
+
+# lxplus
+#RESULTDIR=/eos/user/r/rqian/atlas-run3-multitops-bsm-joboptions/output/$TAG
+#TMPWORKDIR=/eos/user/r/rqian/atlas-run3-multitops-bsm-joboptions/output_work/$TAG
 
 export RIVET_ANALYSIS_PATH=$RIVET_ANALYSIS_PATH:$PWD/rivet/
 
 mkdir -p $RESULTDIR
 rm -rf $TMPWORKDIR && mkdir -p $TMPWORKDIR
-cp -r --dereference ${DSID:0:3}xxx/$DSID $TMPWORKDIR/
-# if DSID is not 100800, copy the 100xxx/100800 folder as well
-if [[ $DSID -ne 100800 ]]; then
-    cp -r --dereference 100xxx/100800 $TMPWORKDIR/
+
+JOBFOLDER=${DSID:0:3}xxx
+if [[ $GRIDPACK -eq 1 ]];then
+JOBFOLDER=${DSID:0:3}xxx_gridpack
 fi
-cp -r --dereference mcjoboptions/${DSID:0:3}xxx/$DSID $TMPWORKDIR/ 
+
+cp -r --dereference $JOBFOLDER/$DSID $TMPWORKDIR/
+
+# if DSID is not 100800, copy the 100xxx/100800 folder as well
+if [[ $DSID -ne 100800 && $DSID -gt 100799 && $DSID -lt 100900 ]]; then
+    cp -r --dereference $JOBFOLDER/100800 $TMPWORKDIR/
+fi
+if [[ $DSID -ne 100910 && $DSID -gt 100899 && $DSID -lt 101000 ]]; then
+    cp -r --dereference $JOBFOLDER/100910 $TMPWORKDIR/
+fi
+if [[ $DSID -ne 102010 && $DSID -gt 102000 && $DSID -lt 103000 ]]; then
+    cp -r --dereference $JOBFOLDER/102010 $TMPWORKDIR/
+fi
+
+cp -r --dereference mcjoboptions/$JOBFOLDER/$DSID $TMPWORKDIR/ 
 cp rivet/rivet.py $TMPWORKDIR
 if [[ -f "${INPUTGENFILE}" ]]; then
   cp -r --dereference ${INPUTGENFILE} $TMPWORKDIR/
@@ -65,10 +99,19 @@ fi
 cd $TMPWORKDIR
 
 # Run event generation
+
+if [[ $GRIDPACK -eq 0 ]];then
 COMMAND="Gen_tf.py --firstEvent=1 --maxEvents=$NEVENTS --ecmEnergy=$COMENERGY --randomSeed=$SEED \
   --jobConfig=${DSID} --outputEVNTFile=test_DSID_${DSID}.EVNT.root"
 if [[ -f "${INPUTGENFILE}" ]]; then
    COMMAND+=" --inputGeneratorFile=${INPUTGENFILE}"
+fi
+fi
+
+if [[ $GRIDPACK -eq 1 ]];then
+COMMAND="Gen_tf.py --firstEvent=1 --maxEvents=-1 --ecmEnergy=$COMENERGY --randomSeed=$SEED \
+  --jobConfig=${DSID} --outputEVNTFile=test_gridpack_DSID_${DSID}.EVNT.root --outputFileValidation=False"
+RUNRIVET=0
 fi
 $COMMAND
 
@@ -88,7 +131,9 @@ cp $TMPWORKDIR/test_DSID_${DSID}.EVNT.root $RESULTDIR/
 cp $TMPWORKDIR/Rivet.yoda $RESULTDIR/
 cat log.generate
 cp $TMPWORKDIR/log.generate $RESULTDIR/
-find $TMPWORKDIR/PROC_Top-Philic_UFO_V1_v3-nobmass_0/SubProcesses -type f -name "*.jpg" -exec cp --parents {} $RESULTDIR/ \;
+find $TMPWORKDIR/PROC_*/SubProcesses -type f -name "*.jpg" -exec cp --parents {} $RESULTDIR/ \;
+
+# comment next line if testing
 rm -rf $TMPWORKDIR
 cd -
 
