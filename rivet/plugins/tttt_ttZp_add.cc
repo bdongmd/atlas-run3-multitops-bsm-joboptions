@@ -114,6 +114,8 @@ namespace Rivet {
 
         book(_h["Inclusive_mttbar_Leading"],"Inclusive_mttbar_Leading",870,150,4500);
         book(_h["Inclusive_mttbar_Leading_zoomin"],"Inclusive_mttbar_Leading_zoomin",1740,150,4500);
+        book(_h["Inclusive_mttbar_SubLeading"],"Inclusive_mttbar_SubLeading",870,150,4500);
+        book(_h["Inclusive_mttbar_SubLeading_zoomin"],"Inclusive_mttbar_SubLeading_zoomin",1740,150,4500);
 
         book(_h["Inclusive_mZprime400"],"Inclusive_mZprime400",20,300,500);
         book(_h["Inclusive_mZprime500"],"Inclusive_mZprime500",20,400,600);
@@ -127,6 +129,19 @@ namespace Rivet {
         book(_h["Inclusive_mZprime2000"],"Inclusive_mZprime2000",20,1900,2100);
         book(_h["Inclusive_mZprime2500"],"Inclusive_mZprime2500",20,2400,2600);
         book(_h["Inclusive_mZprime3000"],"Inclusive_mZprime3000",20,2900,3100);
+
+        book(_h["Inclusive_mttbar_Leading400"],"Inclusive_mttbar_Leading400",20,300,500);
+        book(_h["Inclusive_mttbar_Leading500"],"Inclusive_mttbar_Leading500",20,400,600);
+        book(_h["Inclusive_mttbar_Leading600"],"Inclusive_mttbar_Leading600",20,500,700);
+        book(_h["Inclusive_mttbar_Leading700"],"Inclusive_mttbar_Leading700",20,600,800);
+        book(_h["Inclusive_mttbar_Leading800"],"Inclusive_mttbar_Leading800",20,700,900);
+        book(_h["Inclusive_mttbar_Leading900"],"Inclusive_mttbar_Leading900",20,800,1000);
+        book(_h["Inclusive_mttbar_Leading1000"],"Inclusive_mttbar_Leading1000",20,900,1100);
+        book(_h["Inclusive_mttbar_Leading1250"],"Inclusive_mttbar_Leading1250",20,1150,1350);
+        book(_h["Inclusive_mttbar_Leading1500"],"Inclusive_mttbar_Leading1500",20,1400,1600);
+        book(_h["Inclusive_mttbar_Leading2000"],"Inclusive_mttbar_Leading2000",20,1900,2100);
+        book(_h["Inclusive_mttbar_Leading2500"],"Inclusive_mttbar_Leading2500",20,2400,2600);
+        book(_h["Inclusive_mttbar_Leading3000"],"Inclusive_mttbar_Leading3000",20,2900,3100);
 
         book(_h["Inclusive_pT_Zprime"],"Inclusive_pT_Zprime",25,0,1000);
         book(_h["Inclusive_pT_ttbar_FromZprime"],"Inclusive_pT_ttbar_FromZprime",25,0,1000);
@@ -356,15 +371,31 @@ namespace Rivet {
       }
 
 
-      sortByPt(topCandsFromZprime);
-      sortByPt(topCands);
-      sortByPt(positopCands);
-      sortByPt(antitopCands);
+      topCandsFromZprime = sortByPt(topCandsFromZprime);
+      topCands = sortByPt(topCands);
+      positopCands = sortByPt(positopCands);
+      antitopCands = sortByPt(antitopCands);
 
       if ( positopCands.size() == 2 && antitopCands.size() == 2){
-        double InvM_ttbar_Leading_SubLeading = ( positopCands.at(0).momentum() + antitopCands.at(0).momentum() ).mass()/GeV;
-        _h["Inclusive_mttbar_Leading"]->fill(InvM_ttbar_Leading_SubLeading);
-        _h["Inclusive_mttbar_Leading_zoomin"]->fill(InvM_ttbar_Leading_SubLeading);
+        double InvM_ttbar_Leading = ( positopCands.at(0).momentum() + antitopCands.at(0).momentum() ).mass()/GeV;
+        double InvM_ttbar_SubLeading = ( positopCands.at(1).momentum() + antitopCands.at(1).momentum() ).mass()/GeV;
+
+        _h["Inclusive_mttbar_Leading"]->fill(InvM_ttbar_Leading);
+        _h["Inclusive_mttbar_Leading_zoomin"]->fill(InvM_ttbar_Leading);
+        _h["Inclusive_mttbar_Leading400"]->fill(InvM_ttbar_Leading);
+        _h["Inclusive_mttbar_Leading500"]->fill(InvM_ttbar_Leading);
+        _h["Inclusive_mttbar_Leading600"]->fill(InvM_ttbar_Leading);
+        _h["Inclusive_mttbar_Leading700"]->fill(InvM_ttbar_Leading);
+        _h["Inclusive_mttbar_Leading800"]->fill(InvM_ttbar_Leading);
+        _h["Inclusive_mttbar_Leading900"]->fill(InvM_ttbar_Leading);
+        _h["Inclusive_mttbar_Leading1000"]->fill(InvM_ttbar_Leading);
+        _h["Inclusive_mttbar_Leading1250"]->fill(InvM_ttbar_Leading);
+        _h["Inclusive_mttbar_Leading1500"]->fill(InvM_ttbar_Leading);
+        _h["Inclusive_mttbar_Leading2000"]->fill(InvM_ttbar_Leading);
+        _h["Inclusive_mttbar_Leading2500"]->fill(InvM_ttbar_Leading);
+        _h["Inclusive_mttbar_Leading3000"]->fill(InvM_ttbar_Leading);
+        _h["Inclusive_mttbar_SubLeading"]->fill(InvM_ttbar_SubLeading);
+        _h["Inclusive_mttbar_SubLeading_zoomin"]->fill(InvM_ttbar_SubLeading);
       }
 
       if ( positopCands.size() == 2 ){

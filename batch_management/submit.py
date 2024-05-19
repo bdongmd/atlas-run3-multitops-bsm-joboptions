@@ -21,6 +21,14 @@ parser.add_argument(
     # default=[13_600., 13_000.],
     default=[13_600.],
 )
+
+parser.add_argument(
+    "--gridpack",
+    help="gridpack mode selection",
+    type=bool,
+    default=0,
+)
+
 args = parser.parse_args()
 
 
@@ -44,6 +52,6 @@ for dsid, com in product(args.dsids, args.ecmEnergy):
     workdir = os.getcwd()
 
     command = "cd {0} && source {0}/setup.sh && bash {0}/run.sh ".format(workdir)
-    command += " {dsid} {nevents} {com} {seed}".format(dsid=dsid, nevents=args.eventsPerJob, com=com, seed=seed)
+    command += " {dsid} {nevents} {com} {seed} {gridpack}".format(dsid=dsid, nevents=args.eventsPerJob, com=com, seed=seed,gridpack=args.gridpack)
 
     handler.send_job(command, tag)
