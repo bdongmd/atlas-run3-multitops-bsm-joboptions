@@ -111,6 +111,7 @@ class CondorHandler(object) :
       fs.write('Output              = {0}/stdout_{1}_$(ClusterId).txt\n'.format(self.log_path, self._tag))
       fs.write('Error               = {0}/stderr_{1}_$(ClusterId).txt\n'.format(self.log_path, self._tag))
       fs.write('log                 = {0}/batch_{1}_$(ClusterId).log\n'.format(self.log_path, self._tag))
+      fs.write('+isLongJob=True\n')
       fs.write('requirements = (OpSysAndVer =?= "CentOS7")\n')
       fs.write('\nqueue\n')
       fs.close()

@@ -61,7 +61,7 @@ fi
 
 #tier3
 RESULTDIR=/msu/data/t3work9/rongqian/atlascodingtutorial/atlas-run3-multitops-bsm-joboptions/output/$TAG
-TMPWORKDIR=/tmp/evtgen_$TAG
+#TMPWORKDIR=/tmp/evtgen_$TAG
 TMPWORKDIR=/msu/data/t3work9/rongqian/atlascodingtutorial/atlas-run3-multitops-bsm-joboptions/work/evtgen_$TAG
 
 # lxplus

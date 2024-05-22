@@ -250,7 +250,7 @@ if reweight:
 #---------------------------------------------------------------------------------------------------   
 print_cards(reweight_card=reweight_card if reweight else None)
 generate(process_dir=process_dir, runArgs=runArgs)
-arrange_output(process_dir=process_dir, runArgs=runArgs, lhe_version=lhe_version, saveProcDir=development_mode)
+arrange_output(process_dir=process_dir, runArgs=runArgs, lhe_version=lhe_version)
 
 #--------------------------------------------------------------
 # Storing information

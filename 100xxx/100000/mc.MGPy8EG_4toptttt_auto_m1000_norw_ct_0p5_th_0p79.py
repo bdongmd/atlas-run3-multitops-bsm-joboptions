@@ -16,4 +16,4 @@ ct1=1.0
 from math import pi
 theta1=pi/4.
 reweight = False
-include("MadGraphControl_TopPhilicG_4t_v2.py")
+include("MadGraphControl_TopPhilicG_4t_v3.py")
