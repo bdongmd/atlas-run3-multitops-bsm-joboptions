@@ -25,7 +25,7 @@ parser.add_argument(
 parser.add_argument(
     "--gridpack",
     help="gridpack mode selection",
-    type=bool,
+    type=int,
     default=0,
 )
 

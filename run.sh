@@ -62,7 +62,7 @@ fi
 #tier3
 RESULTDIR=/msu/data/t3work9/rongqian/atlascodingtutorial/atlas-run3-multitops-bsm-joboptions/output/$TAG
 #TMPWORKDIR=/tmp/evtgen_$TAG
-TMPWORKDIR=/msu/data/t3work9/rongqian/atlascodingtutorial/atlas-run3-multitops-bsm-joboptions/work/evtgen_$TAG
+TMPWORKDIR=/msu/data/t3work9/rongqian/atlascodingtutorial/atlas-run3-multitops-bsm-joboptions/work_MCJO/evtgen_$TAG
 
 # lxplus
 #RESULTDIR=/eos/user/r/rqian/atlas-run3-multitops-bsm-joboptions/output/$TAG
@@ -113,6 +113,8 @@ COMMAND="Gen_tf.py --firstEvent=1 --maxEvents=-1 --ecmEnergy=$COMENERGY --random
   --jobConfig=${DSID} --outputEVNTFile=test_gridpack_DSID_${DSID}.EVNT.root --outputFileValidation=False"
 RUNRIVET=0
 fi
+
+echo $COMMAND
 $COMMAND
 
 # Run rivet
@@ -134,7 +136,7 @@ cp $TMPWORKDIR/log.generate $RESULTDIR/
 find $TMPWORKDIR/PROC_*/SubProcesses -type f -name "*.jpg" -exec cp --parents {} $RESULTDIR/ \;
 
 # comment next line if testing
-rm -rf $TMPWORKDIR
+#rm -rf $TMPWORKDIR
 cd -
 
 # Generate the rivet plots

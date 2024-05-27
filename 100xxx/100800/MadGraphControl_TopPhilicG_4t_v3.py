@@ -150,7 +150,7 @@ process_string = {
           "add process p p > t t~ t~ j QCD=0 QED=2 Qv1=2",
  "ttwt": "generate p p > t t~ t~ w+ QCD=1 QED=1 Qv1=2" + "\n" + \
           "add process p p > t t~ t w- QCD=1 QED=1 Qv1=2",
- "ttttsm": "generate p p > t t~ t t~ QCD=4 QED=2 Qv1=2",
+ "ttttsm": "generate p p > t t~ t t~ QCD=4 QED=0 Qv1=2",
 }
 
 # reweighting is not supported for resonant processes

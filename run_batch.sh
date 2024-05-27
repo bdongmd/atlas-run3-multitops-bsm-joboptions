@@ -12,6 +12,6 @@
 EVENTS=100000             #Events per job
 GRIDPACK=1
 
-COMMAND="python batch_management/submit.py --eventsPerJob ${EVENTS} -d ${DSIDS} --gridpack ${GRIDPACK}"
+COMMAND="python batch_management/submit.py --eventsPerJob ${EVENTS} -d ${DSIDS} --gridpack ${GRIDPACK} --ecmEnergy 13000. 13600."
 echo $COMMAND
 $COMMAND

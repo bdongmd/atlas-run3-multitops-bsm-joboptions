@@ -134,13 +134,30 @@ rivet-mkhtml --errs --no-weights  -o my_plots output/100400_13000GeV_372777/Rive
 | 100858 | ttZ' s+t SM  | 2500 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
 | 100859 | ttZ' s+t SM  | 3000 | AUTO  |  3.0 |  pi/4 | p > t t~ Zp, Zp > tt               | yes      |
 | 100860 | tWZ' coupl.  |  400 | AUTO  |  3.0 |  pi/4 | p p > t t~ t~ w+ QCD=1 QED=1 Qv1=2 | yes      |
-| 100861 | tjZ' coupl.  |  400 | AUTO  |  3.0 |  pi/4 | generate p p > t t~ t j QCD=0 QED=2 Qv1=2 | yes      |
-| 100862 | ttZ' s+t ch  |  400 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
-| 100863 | ttZ' s+t ch  | 1000 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
-| 100864 | ttZ' s+t ch  | 2000 | AUTO  |  1.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
-| 100865 | ttZ' s+t ch  |  400 | AUTO  |  2.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
-| 100866 | ttZ' s+t ch  | 1000 | AUTO  |  2.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
-| 100867 | ttZ' s+t ch  | 2000 | AUTO  |  2.0 |  pi/4 | p > t t~ Zp, Zp > tt               | no       |
+| 100861 | tWZ' coupl.  |  500 | AUTO  |  3.0 |  pi/4 | p p > t t~ t~ w+ QCD=1 QED=1 Qv1=2 | yes      |
+| 100862 | tWZ' coupl.  |  600 | AUTO  |  3.0 |  pi/4 | p p > t t~ t~ w+ QCD=1 QED=1 Qv1=2 | yes      |
+| 100863 | tWZ' coupl.  |  700 | AUTO  |  3.0 |  pi/4 | p p > t t~ t~ w+ QCD=1 QED=1 Qv1=2 | yes      |
+| 100864 | tWZ' coupl.  |  800 | AUTO  |  3.0 |  pi/4 | p p > t t~ t~ w+ QCD=1 QED=1 Qv1=2 | yes      |
+| 100865 | tWZ' coupl.  |  900 | AUTO  |  3.0 |  pi/4 | p p > t t~ t~ w+ QCD=1 QED=1 Qv1=2 | yes      |
+| 100866 | tWZ' coupl.  |  1000 | AUTO  |  3.0 |  pi/4 | p p > t t~ t~ w+ QCD=1 QED=1 Qv1=2 | yes      |
+| 100867 | tWZ' coupl.  |  1250 | AUTO  |  3.0 |  pi/4 | p p > t t~ t~ w+ QCD=1 QED=1 Qv1=2 | yes      |
+| 100868 | tWZ' coupl.  |  1500 | AUTO  |  3.0 |  pi/4 | p p > t t~ t~ w+ QCD=1 QED=1 Qv1=2 | yes      |
+| 100869 | tWZ' coupl.  |  2000 | AUTO  |  3.0 |  pi/4 | p p > t t~ t~ w+ QCD=1 QED=1 Qv1=2 | yes      |
+| 100870 | tWZ' coupl.  |  2500 | AUTO  |  3.0 |  pi/4 | p p > t t~ t~ w+ QCD=1 QED=1 Qv1=2 | yes      |
+| 100871 | tWZ' coupl.  |  3000 | AUTO  |  3.0 |  pi/4 | p p > t t~ t~ w+ QCD=1 QED=1 Qv1=2 | yes      |
+| 100872 | tjZ' coupl.  |  400 | AUTO  |  3.0 |  pi/4 | generate p p > t t~ t j QCD=0 QED=2 Qv1=2 | yes      |
+| 100873 | tjZ' coupl.  |  500 | AUTO  |  3.0 |  pi/4 | generate p p > t t~ t j QCD=0 QED=2 Qv1=2 | yes      |
+| 100874 | tjZ' coupl.  |  600 | AUTO  |  3.0 |  pi/4 | generate p p > t t~ t j QCD=0 QED=2 Qv1=2 | yes      |
+| 100875 | tjZ' coupl.  |  700 | AUTO  |  3.0 |  pi/4 | generate p p > t t~ t j QCD=0 QED=2 Qv1=2 | yes      |
+| 100876 | tjZ' coupl.  |  800 | AUTO  |  3.0 |  pi/4 | generate p p > t t~ t j QCD=0 QED=2 Qv1=2 | yes      |
+| 100877 | tjZ' coupl.  |  900 | AUTO  |  3.0 |  pi/4 | generate p p > t t~ t j QCD=0 QED=2 Qv1=2 | yes      |
+| 100878 | tjZ' coupl.  |  1000 | AUTO  |  3.0 |  pi/4 | generate p p > t t~ t j QCD=0 QED=2 Qv1=2 | yes      |
+| 100879 | tjZ' coupl.  |  1250 | AUTO  |  3.0 |  pi/4 | generate p p > t t~ t j QCD=0 QED=2 Qv1=2 | yes      |
+| 100880 | tjZ' coupl.  |  1500 | AUTO  |  3.0 |  pi/4 | generate p p > t t~ t j QCD=0 QED=2 Qv1=2 | yes      |
+| 100881 | tjZ' coupl.  |  2000 | AUTO  |  3.0 |  pi/4 | generate p p > t t~ t j QCD=0 QED=2 Qv1=2 | yes      |
+| 100882 | tjZ' coupl.  |  2500 | AUTO  |  3.0 |  pi/4 | generate p p > t t~ t j QCD=0 QED=2 Qv1=2 | yes      |
+| 100882 | tjZ' coupl.  |  3000 | AUTO  |  3.0 |  pi/4 | generate p p > t t~ t j QCD=0 QED=2 Qv1=2 | yes      |
+
 
 ### Backgrounds
 
