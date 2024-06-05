@@ -83,6 +83,7 @@ fi
 
 cp -r --dereference $JOBFOLDER/$DSID $TMPWORKDIR/
 
+
 # if DSID is not 100800, copy the 100xxx/100800 folder as well
 if [[ $DSID -ne 100800 && $DSID -gt 100799 && $DSID -lt 100900 ]]; then
     cp -r --dereference $JOBFOLDER/100800 $TMPWORKDIR/

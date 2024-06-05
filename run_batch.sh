@@ -5,16 +5,17 @@
 #DSIDS="100102 100812 100814 100818 100821 100823 100848 100850 100854 100857 100859"
 #DSIDS="100801 100802 100803 100804 100805 100806 100807 100808 100809 100810 100811 100812"
  DSIDS="100802"
- SEED="230129"
+ #SEED="230129"
+DSIDS="100812 100813 100814 100815 100816 100817 100818 100819 100820 100821 100822 100823"
 
 # for i in $(seq 100800 100859); do
 #     DSIDS="$DSIDS $i"
 # done
-EVENTS=10             #Events per job
-GRIDPACK=2
+EVENTS=100000             #Events per job
+GRIDPACK=1
 
-#COMMAND="python batch_management/submit.py --eventsPerJob ${EVENTS} -d ${DSIDS} --gridpack ${GRIDPACK} --ecmEnergy 13000. 13600."
-COMMAND="python batch_management/submit.py --eventsPerJob ${EVENTS} -d ${DSIDS} --gridpack ${GRIDPACK} --ecmEnergy 13000 --seed ${SEED}"
+COMMAND="python batch_management/submit.py --eventsPerJob ${EVENTS} -d ${DSIDS} --gridpack ${GRIDPACK} --ecmEnergy 13000. 13600."
+#COMMAND="python batch_management/submit.py --eventsPerJob ${EVENTS} -d ${DSIDS} --gridpack ${GRIDPACK} --ecmEnergy 13000 --seed ${SEED}"
 
 echo $COMMAND
 $COMMAND
