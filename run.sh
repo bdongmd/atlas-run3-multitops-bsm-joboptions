@@ -52,17 +52,18 @@ if [[ -z ${INPUTGENFILE} ]]; then
 fi
 
 # launch job
-if [[ $GRIDPACK -eq 0 ]];then
+if [[ $GRIDPACK -eq 0 ]]; then
 TAG=${DSID}_${COMENERGY/.*}GeV_${SEED}_MCJO
 fi
-if [[ $GRIDPACK -eq 1 ]];then
+if [[ $GRIDPACK -eq 1 || $GRIDPACK -eq 2 ]]; then
 TAG=${DSID}_${COMENERGY/.*}GeV_${SEED}_gridpack_MCJO
 fi
 
+TMPWORKDIR=/tmp/evtgen_$TAG
+
 #tier3
 RESULTDIR=/msu/data/t3work9/rongqian/atlascodingtutorial/atlas-run3-multitops-bsm-joboptions/output/$TAG
-#TMPWORKDIR=/tmp/evtgen_$TAG
-TMPWORKDIR=/msu/data/t3work9/rongqian/atlascodingtutorial/atlas-run3-multitops-bsm-joboptions/work_MCJO/evtgen_$TAG
+TMPWORKDIR=/msu/data/t3work9/rongqian/atlascodingtutorial/atlas-run3-multitops-bsm-joboptions/work_MCJO/evtgen_test_$TAG
 
 # lxplus
 #RESULTDIR=/eos/user/r/rqian/atlas-run3-multitops-bsm-joboptions/output/$TAG
@@ -70,11 +71,13 @@ TMPWORKDIR=/msu/data/t3work9/rongqian/atlascodingtutorial/atlas-run3-multitops-b
 
 export RIVET_ANALYSIS_PATH=$RIVET_ANALYSIS_PATH:$PWD/rivet/
 
+if [[ $GRIDPACK -ne 2 ]];then
 mkdir -p $RESULTDIR
 rm -rf $TMPWORKDIR && mkdir -p $TMPWORKDIR
+fi 
 
 JOBFOLDER=${DSID:0:3}xxx
-if [[ $GRIDPACK -eq 1 ]];then
+if [[ $GRIDPACK -ne 0 ]];then
 JOBFOLDER=${DSID:0:3}xxx_gridpack
 fi
 
@@ -114,6 +117,20 @@ COMMAND="Gen_tf.py --firstEvent=1 --maxEvents=-1 --ecmEnergy=$COMENERGY --random
 RUNRIVET=0
 fi
 
+if [[ $GRIDPACK -eq 2 ]];then
+cd $TMPWORKDIR
+ls $INPUTGENFILE
+COMMAND="Gen_tf.py --firstEvent=1 --maxEvents=$NEVENTS --ecmEnergy=$COMENERGY --randomSeed=$SEED \
+  --jobConfig=${DSID} --outputEVNTFile=test_DSID_${DSID}.EVNT.root"
+if [[ -f "${INPUTGENFILE}" ]]; then
+COMMAND+=" --inputGeneratorFile=${INPUTGENFILE}"
+else
+   cp $RESULTDIR/mc*tar.gz .
+   MCfile=$(ls mc*tar.gz)
+   COMMAND+=" --inputGeneratorFile=${MCfile}"
+fi
+fi
+
 echo $COMMAND
 $COMMAND
 
@@ -132,8 +149,10 @@ pwd
 cp $TMPWORKDIR/test_DSID_${DSID}.EVNT.root $RESULTDIR/
 cp $TMPWORKDIR/Rivet.yoda $RESULTDIR/
 cat log.generate
-cp $TMPWORKDIR/log.generate $RESULTDIR/
-find $TMPWORKDIR/PROC_*/SubProcesses -type f -name "*.jpg" -exec cp --parents {} $RESULTDIR/ \;
+cp $TMPWORKDIR/log.generate $RESULTDIR/log.generate_${GRIDPACK}
+cp $TMPWORKDIR/mc*tar.gz $RESULTDIR/
+
+#find $TMPWORKDIR/PROC_*/SubProcesses -type f -name "*.jpg" -exec cp --parents {} $RESULTDIR/ \;
 
 # comment next line if testing
 #rm -rf $TMPWORKDIR

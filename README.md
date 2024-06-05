@@ -12,7 +12,7 @@ git clone --recursive git@github.com:philippgadow/atlas-run3-multitops-bsm-jobop
 source setup.sh
 bash run.sh
 ```
-Arguments can be provided in the following order: DSID, number of events, COM energy (in GeV), random seed, input LHE file. 
+Arguments can be provided in the following order: DSID, number of events, COM energy (in GeV), random seed, gridpack mode ,input LHE file. 
 
 ## Batch submission
 On DESY NAF modify `run_batch.sh` to include DSIDs of choice and run:
@@ -22,6 +22,15 @@ source setup.sh
 bash run_batch.sh
 ```
 
+## Gridpack mode
+
+Set by the gridpack parameter in run.sh.
+
+0: no gridpack mode
+1: generating gridpack 
+2: generating events with gridpack. In this mode, the seed number used in last step should be use as the seed. This is because it look for the output directory in last step. This may be avoided using input LHE file option(under development).
+
+(TODO): The tmp workdir hasn't been removed yet for testing.
 
 ## Make validation plots
 

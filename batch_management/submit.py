@@ -13,6 +13,7 @@ parser.add_argument(
     type=int,
     default=10_000,
 )
+
 parser.add_argument(
     "--ecmEnergy",
     help="Center of mass energy(s) default: [13_600., 13_000.]",
@@ -24,9 +25,17 @@ parser.add_argument(
 
 parser.add_argument(
     "--gridpack",
-    help="gridpack mode selection",
+    help="gridpack mode selection. 0(default): no gridpack mode. 1: gridpack generation. 2: generating event with gridpack",
     type=int,
     default=0,
+)
+
+parser.add_argument(
+    "--seed",
+    help="If generating event with gridpack, tell the seed used before",
+    nargs="+",
+    default=[],
+    type=int,
 )
 
 args = parser.parse_args()
@@ -46,12 +55,22 @@ handler['project'] = "af-atlas"
 ## only for lxplus
 handler['jobflavour'] = "nextweek"
 
-for dsid, com in product(args.dsids, args.ecmEnergy):
-    seed = int(random.uniform(100000, 500000))
-    tag = "evgen_{dsid}_{com}TeV_{seed}".format(dsid=dsid, com=int(com)*0.001, seed=seed)
-    workdir = os.getcwd()
+if args.gridpack != 2:
+    for dsid, com in product(args.dsids, args.ecmEnergy):
+        seed = int(random.uniform(100000, 500000))
+        tag = "evgen_{dsid}_{com}TeV_{seed}".format(dsid=dsid, com=int(com)*0.001, seed=seed)
+        workdir = os.getcwd()
 
-    command = "cd {0} && source {0}/setup.sh && bash {0}/run.sh ".format(workdir)
-    command += " {dsid} {nevents} {com} {seed} {gridpack}".format(dsid=dsid, nevents=args.eventsPerJob, com=com, seed=seed,gridpack=args.gridpack)
+        command = "cd {0} && source {0}/setup.sh && bash {0}/run.sh ".format(workdir)
+        command += " {dsid} {nevents} {com} {seed} {gridpack}".format(dsid=dsid, nevents=args.eventsPerJob, com=com, seed=seed,gridpack=args.gridpack)
 
-    handler.send_job(command, tag)
+        handler.send_job(command, tag)
+else:
+    for i in range(len((args.dsids))):
+        tag = "evgen_{dsid}_{com}TeV_{seed}_gridpack_gen".format(dsid=args.dsids[i], com=int(args.ecmEnergy[0])*0.001, seed=args.seed[i])
+        workdir = os.getcwd()
+
+        command = "cd {0} && source {0}/setup.sh && bash {0}/run.sh ".format(workdir)
+        command += " {dsid} {nevents} {com} {seed} {gridpack}".format(dsid=args.dsids[i], nevents=args.eventsPerJob, com=int(args.ecmEnergy[0]), seed=args.seed[i],gridpack=args.gridpack)
+
+        handler.send_job(command, tag)

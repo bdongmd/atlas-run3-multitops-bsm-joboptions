@@ -181,7 +181,8 @@ from MadGraphControl.MadGraphParamHelpers import set_top_params
 mtop=172.5
 set_top_params(process_dir=process_dir, mTop=mtop, FourFS=False)
 
-modify_param_card(process_dir=process_dir, params={k:v for (k,v) in parameters.items()})
+if not is_gen_from_gridpack():
+  modify_param_card(process_dir=process_dir, params={k:v for (k,v) in parameters.items()})
 
 # ---------------------------------------------------------------------------
 # MadSpin Card
