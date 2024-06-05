@@ -1,21 +1,27 @@
 #!/bin/bash
 
-# DSIDS="100800 100806 100809 100812 100818 100821 100824 100830 100833 100836 100842 100845 100848 100854 100857 100860 100861"
-#DSIDS="100862 100863 100864 100865 100866 100867 100857"
-#DSIDS="100102 100812 100814 100818 100821 100823 100848 100850 100854 100857 100859"
-#DSIDS="100801 100802 100803 100804 100805 100806 100807 100808 100809 100810 100811 100812"
- DSIDS="100802"
- #SEED="230129"
-DSIDS="100812 100813 100814 100815 100816 100817 100818 100819 100820 100821 100822 100823"
+EVENTS=100000             # Events per job
+GRIDPACK=1                # Control of gridpack mode (see README for more information)
 
-# for i in $(seq 100800 100859); do
-#     DSIDS="$DSIDS $i"
-# done
-EVENTS=100000             #Events per job
-GRIDPACK=1
+#######################################################
+# Use this block if generating events from gridpack
+# The DSID and SEED should corresponding to each other
+# ecmEnergy can be only 13000 or 13600
+#######################################################
+#DSIDS="100802"
+#SEED="230129"
 
-COMMAND="python batch_management/submit.py --eventsPerJob ${EVENTS} -d ${DSIDS} --gridpack ${GRIDPACK} --ecmEnergy 13000. 13600."
 #COMMAND="python batch_management/submit.py --eventsPerJob ${EVENTS} -d ${DSIDS} --gridpack ${GRIDPACK} --ecmEnergy 13000 --seed ${SEED}"
+
+#######################################################
+# Use this block in other case
+#######################################################
+
+DSIDS="100812 100813 100814 100815 100816 100817 100818 100819 100820 100821 100822 100823"
+COMMAND="python batch_management/submit.py --eventsPerJob ${EVENTS} -d ${DSIDS} --gridpack ${GRIDPACK} --ecmEnergy 13000. 13600."
+
+
+#######################################################
 
 echo $COMMAND
 $COMMAND

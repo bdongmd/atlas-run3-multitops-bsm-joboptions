@@ -59,11 +59,12 @@ if [[ $GRIDPACK -eq 1 || $GRIDPACK -eq 2 ]]; then
 TAG=${DSID}_${COMENERGY/.*}GeV_${SEED}_gridpack_MCJO
 fi
 
+# TMPWORKDIR should be this if not testing
 TMPWORKDIR=/tmp/evtgen_$TAG
 
 #tier3
 RESULTDIR=/msu/data/t3work9/rongqian/atlascodingtutorial/atlas-run3-multitops-bsm-joboptions/output/$TAG
-TMPWORKDIR=/msu/data/t3work9/rongqian/atlascodingtutorial/atlas-run3-multitops-bsm-joboptions/work_MCJO/evtgen_test_$TAG
+TMPWORKDIR=/msu/data/t3work9/rongqian/atlascodingtutorial/atlas-run3-multitops-bsm-joboptions/work_MCJO/evtgen_$TAG
 
 # lxplus
 #RESULTDIR=/eos/user/r/rqian/atlas-run3-multitops-bsm-joboptions/output/$TAG
@@ -73,6 +74,7 @@ export RIVET_ANALYSIS_PATH=$RIVET_ANALYSIS_PATH:$PWD/rivet/
 
 if [[ $GRIDPACK -ne 2 ]];then
 mkdir -p $RESULTDIR
+#comment this line if testing
 rm -rf $TMPWORKDIR && mkdir -p $TMPWORKDIR
 fi 
 
@@ -155,8 +157,8 @@ cp $TMPWORKDIR/mc*tar.gz $RESULTDIR/
 
 #find $TMPWORKDIR/PROC_*/SubProcesses -type f -name "*.jpg" -exec cp --parents {} $RESULTDIR/ \;
 
-# comment next line if testing
-#rm -rf $TMPWORKDIR
+# uncomment next line if testing
+rm -rf $TMPWORKDIR
 cd -
 
 # Generate the rivet plots
