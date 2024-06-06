@@ -83,7 +83,7 @@ if [[ $GRIDPACK -ne 0 ]];then
 JOBFOLDER=${DSID:0:3}xxx_gridpack
 fi
 
-cp -r --dereference $JOBFOLDER/$DSID $TMPWORKDIR/
+cp -r --dereference $JOBFOLDER/$DSID $TMPWORKDIR
 
 
 # if DSID is not 100800, copy the 100xxx/100800 folder as well
