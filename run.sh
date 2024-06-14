@@ -63,12 +63,12 @@ fi
 TMPWORKDIR=/tmp/evtgen_$TAG
 
 #tier3
-RESULTDIR=/msu/data/t3work9/rongqian/atlascodingtutorial/atlas-run3-multitops-bsm-joboptions/output/$TAG
-TMPWORKDIR=/msu/data/t3work9/rongqian/atlascodingtutorial/atlas-run3-multitops-bsm-joboptions/work_MCJO/evtgen_$TAG
+#RESULTDIR=/msu/data/t3work9/rongqian/atlascodingtutorial/atlas-run3-multitops-bsm-joboptions/output/$TAG
+#TMPWORKDIR=/msu/data/t3work9/rongqian/atlascodingtutorial/atlas-run3-multitops-bsm-joboptions/work_MCJO/evtgen_$TAG
 
 # lxplus
-#RESULTDIR=/eos/user/r/rqian/atlas-run3-multitops-bsm-joboptions/output/$TAG
-#TMPWORKDIR=/eos/user/r/rqian/atlas-run3-multitops-bsm-joboptions/output_work/$TAG
+RESULTDIR=/eos/user/b/bdong/ttZprime_gridpack/output/$TAG
+#TMPWORKDIR=/eos/user/b/bdong/ttZprime_gridpack/output_work/$TAG
 
 export RIVET_ANALYSIS_PATH=$RIVET_ANALYSIS_PATH:$PWD/rivet/
 

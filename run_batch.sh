@@ -1,6 +1,6 @@
 #!/bin/bash
 
-EVENTS=100000             # Events per job
+EVENTS=1000             # Events per job
 GRIDPACK=1                # Control of gridpack mode (see README for more information)
 
 #######################################################
@@ -17,7 +17,8 @@ GRIDPACK=1                # Control of gridpack mode (see README for more inform
 # Use this block in other case
 #######################################################
 
-DSIDS="100812 100813 100814 100815 100816 100817 100818 100819 100820 100821 100822 100823"
+#DSIDS="100812 100813 100814 100815 100816 100817 100818 100819 100820 100821 100822 100823"
+DSIDS="100812"
 COMMAND="python batch_management/submit.py --eventsPerJob ${EVENTS} -d ${DSIDS} --gridpack ${GRIDPACK} --ecmEnergy 13000. 13600."
 
 

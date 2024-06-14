@@ -7,9 +7,9 @@ from re import findall
 # Set parameters
 #---------------------------------------------------------------------------------------------------                                               
 lhe_version = 3.0
-safefactor = 6
+safefactor = 8
 development_mode=False
-gridpack_mode=True
+gridpack_mode=False
 
 # get job option name to extract parameters
 from MadGraphControl.MadGraphUtilsHelpers import get_physics_short
@@ -127,8 +127,10 @@ parameters = {
 }
 
 # apply multiplicative safe-factor to number of generated events
-nevents=int(runArgs.maxEvents * safefactor)
-if (nevents <0): nevents = 10000
+calc_factor = lambda n, br : (5*math.sqrt(n)+n)/(n*br)
+nevents=int( calc_factor(runArgs.maxEvents, 0.3) * runArgs.maxEvents)
+#nevents=int(runArgs.maxEvents * safefactor)
+#if (nevents <0): nevents = 10000
 extras['nevents'] = nevents
 
 #---------------------------------------------------------------------------------------------------
