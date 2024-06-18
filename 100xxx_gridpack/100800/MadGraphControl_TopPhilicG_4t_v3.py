@@ -7,7 +7,7 @@ from re import findall
 # Set parameters
 #---------------------------------------------------------------------------------------------------                                               
 lhe_version = 3.0
-safefactor = 8
+safefactor = 6
 development_mode=False
 gridpack_mode=False
 
@@ -127,10 +127,8 @@ parameters = {
 }
 
 # apply multiplicative safe-factor to number of generated events
-calc_factor = lambda n, br : (5*math.sqrt(n)+n)/(n*br)
-nevents=int( calc_factor(runArgs.maxEvents, 0.3) * runArgs.maxEvents)
-#nevents=int(runArgs.maxEvents * safefactor)
-#if (nevents <0): nevents = 10000
+nevents=int(runArgs.maxEvents * safefactor)
+if (nevents <0): nevents = 10000
 extras['nevents'] = nevents
 
 #---------------------------------------------------------------------------------------------------
