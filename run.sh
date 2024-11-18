@@ -63,17 +63,17 @@ fi
 TMPWORKDIR=/tmp/evtgen_$TAG
 
 #tier3
-#RESULTDIR=/msu/data/t3work9/rongqian/atlascodingtutorial/atlas-run3-multitops-bsm-joboptions/output/$TAG
-#TMPWORKDIR=/msu/data/t3work9/rongqian/atlascodingtutorial/atlas-run3-multitops-bsm-joboptions/work_MCJO/evtgen_$TAG
+RESULTDIR=/msu/data/t3work10/bdong/ttZprime_noMadSpin_ct1p0/$TAG
+TMPWORKDIR=/msu/data/t3work10/bdong/ttZprime_noMadSpin_ct1p0/evtgen_$TAG
 
 # lxplus
-RESULTDIR=/eos/user/b/bdong/ttZprime_gridpack/output/$TAG
+#RESULTDIR=/eos/user/b/bdong/ttZprime_gridpack/output/$TAG
 #TMPWORKDIR=/eos/user/b/bdong/ttZprime_gridpack/output_work/$TAG
 
 export RIVET_ANALYSIS_PATH=$RIVET_ANALYSIS_PATH:$PWD/rivet/
 
 if [[ $GRIDPACK -ne 2 ]];then
-mkdir -p $RESULTDIR
+#mkdir -p $RESULTDIR
 #comment this line if testing
 rm -rf $TMPWORKDIR && mkdir -p $TMPWORKDIR
 fi 
@@ -87,17 +87,11 @@ cp -r --dereference $JOBFOLDER/$DSID $TMPWORKDIR
 
 
 # if DSID is not 100800, copy the 100xxx/100800 folder as well
-if [[ $DSID -ne 100800 && $DSID -gt 100799 && $DSID -lt 100900 ]]; then
+if [[ $DSID -ne 100800 && $DSID -gt 100799 && $DSID -lt 100990 ]]; then
     cp -r --dereference $JOBFOLDER/100800 $TMPWORKDIR/
 fi
-if [[ $DSID -ne 100910 && $DSID -gt 100899 && $DSID -lt 101000 ]]; then
-    cp -r --dereference $JOBFOLDER/100910 $TMPWORKDIR/
-fi
-if [[ $DSID -ne 102010 && $DSID -gt 102000 && $DSID -lt 103000 ]]; then
-    cp -r --dereference $JOBFOLDER/102010 $TMPWORKDIR/
-fi
 
-cp -r --dereference mcjoboptions/$JOBFOLDER/$DSID $TMPWORKDIR/ 
+cp -r --dereference $JOBFOLDER/$DSID $TMPWORKDIR/ 
 cp rivet/rivet.py $TMPWORKDIR
 if [[ -f "${INPUTGENFILE}" ]]; then
   cp -r --dereference ${INPUTGENFILE} $TMPWORKDIR/
@@ -137,33 +131,23 @@ fi
 echo $COMMAND
 $COMMAND
 
-# Run rivet
-if [[ $RUNRIVET -eq 1 ]]; then
-    rm PoolFileCatalog.xml
-    athena rivet.py --filesInput test_DSID_${DSID}.EVNT.root
-    cp Rivet.yoda.gz $RESULTDIR/
-fi 
-
 # Diagnostics
-ls
-pwd
-
 # copy results over
-cp $TMPWORKDIR/test_DSID_${DSID}.EVNT.root $RESULTDIR/
-cp $TMPWORKDIR/Rivet.yoda $RESULTDIR/
-cat log.generate
-cp $TMPWORKDIR/log.generate $RESULTDIR/log.generate_${GRIDPACK}
-cp $TMPWORKDIR/mc*tar.gz $RESULTDIR/
+#cp $TMPWORKDIR/test_DSID_${DSID}.EVNT.root $RESULTDIR/
+#cp $TMPWORKDIR/Rivet.yoda $RESULTDIR/
+#cat log.generate
+#cp $TMPWORKDIR/log.generate $RESULTDIR/log.generate_${GRIDPACK}
+#cp $TMPWORKDIR/mc*tar.gz $RESULTDIR/
 
 #find $TMPWORKDIR/PROC_*/SubProcesses -type f -name "*.jpg" -exec cp --parents {} $RESULTDIR/ \;
 
 # uncomment next line if testing
-rm -rf $TMPWORKDIR
-cd -
+#rm -rf $TMPWORKDIR
+#cd -
 
 # Generate the rivet plots
-if [[ $MAKERIVETPLOTS -eq 1 ]]; then
-    cd $RESULTDIR
-    rivet-mkhtml --errs --no-weights -o rivet_plots Rivet.yoda.gz:Title=$RIVETTITLE
-    cd -
-fi
+#if [[ $MAKERIVETPLOTS -eq 1 ]]; then
+#    cd $RESULTDIR
+#    rivet-mkhtml --errs --no-weights -o rivet_plots Rivet.yoda.gz:Title=$RIVETTITLE
+#    cd -
+#fi
